@@ -173,6 +173,6 @@
 {{--            </div>--}}
 {{--        </div>--}}
 
-    VSEM PRIVEEET
+    PRIBEEET OLECHKA!!!
     </body>
 </html>
