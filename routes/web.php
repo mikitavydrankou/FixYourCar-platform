@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Namu\WireChat\Livewire\Chat\Index;
+use Namu\WireChat\Livewire\Chat\View;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +20,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::middleware(config('wirechat.routes.middleware'))
+    ->prefix(config('wirechat.routes.prefix'))
+    ->group(function () {
+        Route::get('/', Index::class)->name('chats');
+        Route::get('/{conversation_id}', View::class)->name('chat');
+    });
