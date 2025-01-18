@@ -21,9 +21,4 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware(config('wirechat.routes.middleware'))
-    ->prefix(config('wirechat.routes.prefix'))
-    ->group(function () {
-        Route::get('/', Index::class)->name('chats');
-        Route::get('/{conversation_id}', View::class)->name('chat');
-    });
+
