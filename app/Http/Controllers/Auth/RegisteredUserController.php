@@ -19,7 +19,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $type = request()->query('type');
+        return view('auth.register', ['type' => $type]);
     }
 
     /**
@@ -29,6 +30,12 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $role_id = match ($request->type) {
+            'service' => 3,
+            'repair' => 2,
+        };
+
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -39,7 +46,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'email_verified_at' => now(),
+            'role_id' => $role_id
         ]);
 
         event(new Registered($user));
