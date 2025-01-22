@@ -124,9 +124,10 @@ class CarController extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,heic', // Поддержка HEIC
             ]);
             $file = $request->file('image');
+
             $image = $manager->read($file);
             $imageName = time() . '.' . $file->extension();
-            $image->toJpeg()->save(public_path('images/' . $imageName));
+            $image->orient()->toJpeg()->save(public_path('images/' . $imageName));
             $imagePath = '/images/' . $imageName;
         } else {
             $imagePath = '/images/default_car.jpg';
