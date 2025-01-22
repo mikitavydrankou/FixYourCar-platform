@@ -38,6 +38,8 @@ class CarController extends Controller
     {
         $imagePath = $this->handleImageUpload($request);
 
+
+
         if (!is_numeric($request->mileage)) {
             return redirect()->back()->withErrors(['mileage' => 'Mileage must be a number']);
         }
@@ -129,9 +131,11 @@ class CarController extends Controller
             $imageName = time() . '.' . $file->extension();
             $image->orient()->toJpeg()->save(public_path('images/' . $imageName));
             $imagePath = '/images/' . $imageName;
+            dd($imagePath);
         } else {
             $imagePath = '/images/default_car.jpg';
         }
+        dd($imagePath);
         return $imagePath;
     }
 }
