@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Laravel\Facades\Image;
+
 
 class CarController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -29,16 +32,28 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         if ($request->hasFile('image')) {
             $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,heic|max:5120', // Поддержка HEIC
             ]);
 
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
-            $imagePath = '/images/'.$imageName;
+            $file = $request->file('image');
+            $image = $image = Image::read($file->getPathname());
+
+            if ($file->getClientOriginalExtension() === 'heic') {
+                // Конвертация HEIC в JPEG
+                $image->encode('jpg', 85); // 85 качество JPEG
+                $imageName = time() . '.jpg';
+            } else {
+                $imageName = time() . '.' . $file->extension();
+            }
+
+
+            // Сохранение изображения
+            $image->save(public_path('images/' . $imageName));
+            $imagePath = '/images/' . $imageName;
         } else {
             $imagePath = '/images/default_car.jpg';
         }
@@ -49,19 +64,19 @@ class CarController extends Controller
 
         Car::create([
             'user_id' => Auth::id(),
-            'make' => $request -> make,
-            'model' => $request -> model,
-            'year' => $request -> year,
-            'license_plate' => $request -> license_plate,
-            'engine_type' => $request -> engine_type,
-            'transmission' => $request -> transmission,
-            'mileage' => $request -> mileage,
-            'last_service_date' => $request -> last_service_date,
+            'make' => $request->make,
+            'model' => $request->model,
+            'year' => $request->year,
+            'license_plate' => $request->license_plate,
+            'engine_type' => $request->engine_type,
+            'transmission' => $request->transmission,
+            'mileage' => $request->mileage,
+            'last_service_date' => $request->last_service_date,
             'image' => $imagePath,
         ]);
-        return redirect()->route('cars')->with('status', 'Maszyna została dodana pomyślnie');
-    }
 
+        return redirect()->route('cars')->with('status', 'Maszyna została добавлена успешно');
+    }
     /**
      * Display the specified resource.
      */
