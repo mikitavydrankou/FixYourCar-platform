@@ -36,30 +36,7 @@ class CarController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        if ($request->hasFile('image')) {
-            $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,heic|max:5120', // Поддержка HEIC
-            ]);
-
-            $file = $request->file('image');
-            $image = $image = Image::read($file->getPathname());
-
-            if ($file->getClientOriginalExtension() == 'heic') {
-                $manager = new ImageManager(Driver::class);
-                $image = $manager->read($file);
-                $imageName = time() . '.jpg';
-                $image->toJpeg()->save(public_path('images/' . $imageName));
-            } else {
-                $imageName = time() . '.' . $file->extension();
-            }
-
-
-            // Сохранение изображения
-            $image->save(public_path('images/' . $imageName));
-            $imagePath = '/images/' . $imageName;
-        } else {
-            $imagePath = '/images/default_car.jpg';
-        }
+        $imagePath = $this->handleImageUpload($request);
 
         if (!is_numeric($request->mileage)) {
             return redirect()->back()->withErrors(['mileage' => 'Mileage must be a number']);
@@ -80,6 +57,7 @@ class CarController extends Controller
 
         return redirect()->route('cars')->with('status', 'Maszyna została добавлена успешно');
     }
+
     /**
      * Display the specified resource.
      */
@@ -101,16 +79,7 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        if ($request->hasFile('image')) {
-            $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
-            $imagePath = '/images/' . $imageName;
-        } else {
-            $imagePath = $car->image;
-        }
+        $imagePath = $this->handleImageUpload($request);
 
         $input = $request->only([
             'make',
@@ -140,5 +109,28 @@ class CarController extends Controller
 //        }
         $car->delete();
         return redirect()->route('cars')->with('status', 'Samochód został usunięty!');
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function handleImageUpload(Request $request): string
+    {
+        $manager = new ImageManager(Driver::class);
+
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,heic', // Поддержка HEIC
+            ]);
+            $file = $request->file('image');
+            $image = $manager->read($file);
+            $imageName = time() . '.' . $file->extension();
+            $image->toJpeg()->save(public_path('images/' . $imageName));
+            $imagePath = '/images/' . $imageName;
+        } else {
+            $imagePath = '/images/default_car.jpg';
+        }
+        return $imagePath;
     }
 }
