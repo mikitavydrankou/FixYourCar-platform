@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 use Intervention\Image\Laravel\Facades\Image;
 
 
@@ -42,10 +44,11 @@ class CarController extends Controller
             $file = $request->file('image');
             $image = $image = Image::read($file->getPathname());
 
-            if ($file->getClientOriginalExtension() === 'heic') {
-                // Конвертация HEIC в JPEG
-                $image->encode('jpg', 85); // 85 качество JPEG
+            if ($file->getClientOriginalExtension() == 'heic') {
+                $manager = new ImageManager(Driver::class);
+                $image = $manager->read($file);
                 $imageName = time() . '.jpg';
+                $image->toJpeg()->save(public_path('images/' . $imageName));
             } else {
                 $imageName = time() . '.' . $file->extension();
             }
