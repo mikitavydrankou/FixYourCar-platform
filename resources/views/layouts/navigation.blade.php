@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('chats')" :active="request()->routeIs('chats')">
                         {{ __('Chats') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('cars')" :active="request()->routeIs('cars')">
+                        {{ __('Cars') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -73,6 +76,13 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('chats')" :active="request()->routeIs('chats')">
+                {{ __('Chats') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('cars')" :active="request()->routeIs('cars')">
+                {{ __('Cars') }}
+            </x-responsive-nav-link>
+
 
         </div>
 
@@ -86,9 +96,6 @@
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('chats')" :active="request()->routeIs('chats')">
-                    {{ __('Chats') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
