@@ -50,6 +50,12 @@ class User extends Authenticatable
         ];
     }
 
+    public function hasRole($roleName): bool
+    {
+
+        return $this->role && $this->role->name === $roleName;
+    }
+
     public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Role::class);

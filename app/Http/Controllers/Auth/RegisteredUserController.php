@@ -31,8 +31,8 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $role_id = match ($request->type) {
-            'service' => 3,
-            'repair' => 2,
+            'service' => 2,
+            'repair' => 3,
         };
 
 

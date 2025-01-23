@@ -12,21 +12,21 @@ Route::get('/', function () {
 
 Route::get('/check-account', function () {
     return view('check-account');
-})->name('check-account');
+})->middleware('guest')->name('check-account');
 
 Route::get('/repair-car', function () {
     return redirect()->route('register', ['type' => 'repair']);
-})->name('repair-car');
+})->middleware('guest')->name('repair-car');
 Route::get('/have-service', function () {
     return redirect()->route('register', ['type' => 'service']);
-})->name('have-service');
+})->middleware('guest')->name('have-service');
 Route::get('/select-role', function () {
     return view('select-role');
-})->name('select-role');
+})->middleware('guest')->name('select-role');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -34,9 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('cars', CarController::class);
-Route::get('cars', [CarController::class, 'index'])->name('cars');
-
+Route::resource('cars', CarController::class)
+    ->middleware('role:3')
+    ->names([
+        'index' => 'cars',
+    ]);
 
 require __DIR__.'/auth.php';
 

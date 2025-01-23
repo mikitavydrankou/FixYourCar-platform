@@ -18,9 +18,12 @@
                     <x-nav-link :href="route('chats')" :active="request()->routeIs('chats')">
                         {{ __('Chats') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('cars')" :active="request()->routeIs('cars')">
-                        {{ __('Cars') }}
-                    </x-nav-link>
+                    @if(Auth::check() && Auth::user()->hasRole('repair'))
+                        <x-nav-link :href="route('cars')" :active="request()->routeIs('cars')">
+                            {{ __('Cars') }}
+                        </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 
@@ -76,12 +79,16 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('chats')" :active="request()->routeIs('chats')">
                 {{ __('Chats') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('cars')" :active="request()->routeIs('cars')">
-                {{ __('Cars') }}
-            </x-responsive-nav-link>
+            @if(Auth::check() && Auth::user()->hasRole('repair'))
+                <x-responsive-nav-link :href="route('cars')" :active="request()->routeIs('cars')">
+                    {{ __('Cars') }}
+                </x-responsive-nav-link>
+            @endif
+
 
 
         </div>
