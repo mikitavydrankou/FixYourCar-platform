@@ -10,7 +10,7 @@
     $currentStatus = $statusStyles[$car->status] ?? $statusStyles['default'];
 @endphp
 
-<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg mx-auto max-w-4xl overflow-hidden">
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg mx-auto max-w-full overflow-hidden">
     <div class="flex flex-wrap md:flex-nowrap">
         <!-- Image Section -->
         <div class="w-full md:w-48 h-48 flex-shrink-0 overflow-hidden bg-gray-200">
@@ -61,3 +61,4 @@
         </div>
     </div>
 </div>
+

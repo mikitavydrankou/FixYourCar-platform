@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="py-12 ">
+        <div class="mx-auto sm:px-6 lg:px-8 space-y-6 ">
             <!-- Status Messages -->
             @if (session('status'))
                 <div class="p-4 sm:p-8 bg-green-100 dark:bg-green-800 shadow sm:rounded-lg" id="success-alert">
@@ -37,8 +37,8 @@
             @endif
 
             <!-- Cars Section -->
-            <div class="p-6 bg-white dark:bg-gray-800 shadow-lg sm:rounded-lg">
-                <div class="max-w-full">
+            <div class="p-6 bg-white dark:bg-gray-800 shadow-lg sm:rounded-lg ">
+                <div class="max-w-full ">
                     @isset($cars)
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{ __('Your Cars') }}</h2>
