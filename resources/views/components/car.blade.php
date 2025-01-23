@@ -32,7 +32,13 @@
                 </div>
 
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
-                    Opis: {{ $car->description ?? 'Brak opisu' }}
+                    Rok: {{ $car->year ?? 'Brak' }}
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Van: {{ $car->license_plate ?? 'Brak' }}
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Przebieg: {{ $car->mileage ?? 'Brak' }}
                 </p>
             </div>
 
@@ -80,7 +86,13 @@
                     <span class="text-gray-600 dark:text-gray-200">{{ $currentStatus['text'] }}</span>
                 </div>
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
-                    Opis: {{ $car->description ?? 'Brak opisu' }}
+                    Rok: {{ $car->year ?? 'Brak' }}
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Van: {{ $car->license_plate ?? 'Brak' }}
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Przebieg: {{ $car->mileage ?? 'Brak' }}
                 </p>
             </div>
 
