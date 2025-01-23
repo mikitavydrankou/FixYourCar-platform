@@ -13,8 +13,10 @@
 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden max-w-xs mx-auto">
     <div class="flex">
         <!-- Image Section -->
-        <div class="w-1/3 h-24 bg-gray-200 overflow-hidden">
-            <img src="{{ asset($car->image) }}" alt="{{ $car->name }}" class="w-full h-full object-cover">
+        <div class="w-full md:w-48 h-48 flex-shrink-0 overflow-hidden bg-gray-200">
+            <img src="{{ asset($car->image) }}"
+                 alt="{{ $car->name }}"
+                 class="w-full h-full object-cover">
         </div>
 
         <!-- Content Section -->
