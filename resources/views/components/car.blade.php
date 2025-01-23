@@ -11,9 +11,9 @@
 @endphp
 
 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg mx-auto max-w-4xl overflow-hidden">
-    <div class="flex">
+    <div class="flex flex-wrap md:flex-nowrap">
         <!-- Image Section -->
-        <div class="w-48 h-48 flex-shrink-0 overflow-hidden bg-gray-200">
+        <div class="w-full md:w-48 h-48 flex-shrink-0 overflow-hidden bg-gray-200">
             <img src="{{ asset($car->image) }}"
                  alt="{{ $car->name }}"
                  class="w-full h-full object-cover">
@@ -23,7 +23,7 @@
         <div class="p-4 flex-1 flex flex-col justify-between">
             <div>
                 <div class="flex justify-between items-center mb-3">
-                    <h5 class="text-xl font-semibold text-gray-800 dark:text-gray-100">{{ $car->make }} - {{ $car->model }}</h5>
+                    <h5 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-gray-100">{{ $car->make }} - {{ $car->model }}</h5>
                     <div class="flex items-center text-sm">
                         <span class="w-3 h-3 rounded-full {{ $currentStatus['class'] }} mr-2"></span>
                         <span class="text-gray-600 dark:text-gray-200">{{ $currentStatus['text'] }}</span>
@@ -35,7 +35,7 @@
                 </p>
             </div>
 
-            <div class="flex justify-end space-x-3 mt-4">
+            <div class="flex flex-wrap justify-end space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
                 <!-- View Button -->
                 <a href="{{ route('cars.show', $car->id) }}"
                    class="flex items-center bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition duration-200 text-sm font-medium">
