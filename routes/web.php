@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceRequestController;
 use Illuminate\Support\Facades\Route;
 use Namu\WireChat\Livewire\Chat\Index;
 use Namu\WireChat\Livewire\Chat\View;
@@ -39,6 +40,15 @@ Route::resource('cars', CarController::class)
     ->names([
         'index' => 'cars',
     ]);
+
+
+Route::get('client/requests', [ServiceRequestController::class, 'client_index'])->name('client.requests');
+Route::get('client/requests/create', [ServiceRequestController::class, 'create'])->name('client.requests.create');
+Route::post('client/requests/store', [ServiceRequestController::class, 'store'])->name('client.requests.store');
+Route::delete('client/requests/delete/{serviceRequest}', [ServiceRequestController::class, 'destroy'])->name('client.requests.destroy');
+Route::get('client/requests/show/{serviceRequest}', [ServiceRequestController::class, 'show'])->name('client.requests.show');
+Route::get('client/requests/edit/{serviceRequest}', [ServiceRequestController::class, 'edit'])->name('client.requests.edit');
+Route::patch('client/requests/update/{serviceRequest}', [ServiceRequestController::class, 'update'])->name('client.requests.update');
 
 require __DIR__.'/auth.php';
 

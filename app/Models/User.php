@@ -65,4 +65,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Car::class);
     }
+    public function serviceRequests(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ServiceRequest::class);
+    }
 }
