@@ -24,6 +24,7 @@ class ServiceRequestController extends Controller
         $serviceRequests = $user->serviceRequests;
         return view('client.requests.index', compact('serviceRequests'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -80,7 +81,8 @@ class ServiceRequestController extends Controller
      */
     public function show(ServiceRequest $serviceRequest)
     {
-        //
+        return view('client.requests.show', compact('serviceRequest',));
+
     }
 
     /**
@@ -88,7 +90,7 @@ class ServiceRequestController extends Controller
      */
     public function edit(ServiceRequest $serviceRequest)
     {
-        //
+        return view('client.requests.edit', compact('serviceRequest',));
     }
 
     /**
@@ -96,7 +98,37 @@ class ServiceRequestController extends Controller
      */
     public function update(Request $request, ServiceRequest $serviceRequest)
     {
-        //
+        if ($request->hasFile('attachments')) {
+
+            $request->validate([
+                'attachments.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+
+            $attachments = [];
+
+            $manager = new ImageManager(new Driver());
+
+            foreach ($request->file('attachments') as $file) {
+                $image = $manager->read($file);
+                $imageName = time() . '_' . $file->getClientOriginalName();
+                $image->orient()->toJpeg()->save(public_path('attachments/' . $imageName));
+                $attachments[] = 'attachments/' . $imageName;
+            }
+        }
+
+
+        $input = $request->only([
+            'problem_description',
+            'urgency',
+            'location',
+
+        ]);
+
+        $input['attachments'] = $attachments;
+
+        $serviceRequest->update($input);
+
+        return redirect()->route('client.requests')->with('status', 'Zgłoszenie zostało pomyślnie zaktualizowane');
     }
 
     /**

@@ -49,16 +49,36 @@
                         </div>
 
                         <!-- Attachments -->
+
                         <div class="mb-6">
                             <x-input-label for="attachments" :value="__('Zdjęcia (do 3 sztuk)')" />
                             <div class="mt-2">
                                 <label for="attachments" class="block w-full p-4 border-2 border-dashed border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-center cursor-pointer hover:border-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <span class="text-sm text-gray-600 dark:text-gray-300">{{ __('Kliknij, aby wybrać zdjęcia') }}</span>
                                 </label>
-                                <input id="attachments" name="attachments[]" type="file" class="hidden" multiple accept="image/*" />
+                                <input id="attachments" name="attachments[]" type="file" class="hidden" multiple accept="image/*" onchange="updateFileList()" />
                             </div>
+                            <div id="file-list" class="mt-2 text-gray-700 dark:text-gray-300"></div>
                             <x-input-error :messages="$errors->get('attachments')" class="mt-2" />
                         </div>
+
+                        <script>
+                            function updateFileList() {
+                                const input = document.getElementById('attachments');
+                                const fileListContainer = document.getElementById('file-list');
+                                fileListContainer.innerHTML = ''; // Очищаем список перед обновлением
+
+                                if (input.files.length > 0) {
+                                    let list = `<p>{{ __('Załadowane pliki') }}: ${input.files.length}</p><ul class="list-disc pl-5">`;
+                                    for (let file of input.files) {
+                                        list += `<li>${file.name}</li>`;
+                                    }
+                                    list += '</ul>';
+                                    fileListContainer.innerHTML = list;
+                                }
+                            }
+                        </script>
+
 
                         <!-- Submit Button -->
                         <div class="flex justify-center mt-6">
