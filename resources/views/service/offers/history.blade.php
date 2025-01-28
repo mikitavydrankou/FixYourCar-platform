@@ -37,19 +37,19 @@
         <div class="w-full">
             <div class="grid grid-cols-1 gap-4">
                 @if($offers->isEmpty())
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">{{ __('No offers sent yet.') }}</p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">{{ __('Nie wysłano jeszcze żadnych ofert.') }}</p>
                 @else
                     @foreach($offers as $service)
                         <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
                             <h3 class="font-semibold text-xl text-gray-900 dark:text-gray-100">
                                 {{ __('Service:') }} {{ $service->name }}
                             </h3>
-                            <p class="text-gray-600 dark:text-gray-400">{{ __('Address: ') }} {{ $service->address }}</p>
-                            <p class="text-gray-600 dark:text-gray-400">{{ __('Phone: ') }} {{ $service->phone }}</p>
+                            <p class="text-gray-600 dark:text-gray-400">{{ __('Adres: ') }} {{ $service->address }}</p>
+                            <p class="text-gray-600 dark:text-gray-400">{{ __('Tel: ') }} {{ $service->phone }}</p>
                             <p class="text-gray-600 dark:text-gray-400">{{ __('Email: ') }} {{ $service->email }}</p>
 
                             @if($service->serviceOffers->isEmpty())
-                                <p class="text-gray-500 dark:text-gray-400 mt-4">{{ __('No offers for this service.') }}</p>
+                                <p class="text-gray-500 dark:text-gray-400 mt-4">{{ __('Brak ofert na tę usługę.') }}</p>
                             @else
                                 <ul class="list-none mt-4">
                                     @foreach($service->serviceOffers as $offer)
@@ -57,8 +57,8 @@
                                             <h4 class="font-semibold text-lg text-gray-800 dark:text-gray-200">
                                                 {{ __('Offer ID:') }} {{ $offer->id }}
                                             </h4>
-                                            <p class="text-gray-700 dark:text-gray-300">{{ __('Description: ') }} {{ $offer->description }}</p>
-                                            <p class="text-gray-700 dark:text-gray-300">{{ __('Price: ') }} ${{ number_format($offer->price, 2) }}</p>
+                                            <p class="text-gray-700 dark:text-gray-300">{{ __('Opis: ') }} {{ $offer->description }}</p>
+                                            <p class="text-gray-700 dark:text-gray-300">{{ __('Cena: ') }} ${{ number_format($offer->price, 2) }}</p>
                                             <p class="text-gray-700 dark:text-gray-300">{{ __('Status: ') }}
                                                 <span class="font-semibold
                                                     {{ $offer->status === 'sent' ? 'text-blue-500' : ($offer->status === 'accepted' ? 'text-green-500' : 'text-red-500') }}">

@@ -19,41 +19,44 @@
 
                     <div class="mb-6">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-white">
-                            {{ __('Car Make & Model') }}:
+                            {{ __('
+Marka i model samochodu') }}:
                         </h3>
                         <p class="text-gray-700 dark:text-gray-300">{{ $serviceRequest->car->make }} - {{ $serviceRequest->car->model }}</p>
                     </div>
 
                     <div class="mb-6">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-white">
-                            {{ __('Problem_description') }}:
+                            {{ __('
+Opis_problemu') }}:
                         </h3>
                         <p class="text-gray-700 dark:text-gray-300">{{ $serviceRequest->problem_description }}</p>
                     </div>
 
                     <div class="mb-6">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-white">
-                            {{ __('Location') }}:
+                            {{ __('
+Lokalizacja') }}:
                         </h3>
                         <p class="text-gray-700 dark:text-gray-300">{{ $serviceRequest->location }}</p>
                     </div>
 
                     <div class="mb-6">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-white">
-                            {{ __('Request Status') }}:
+                            {{ __('Status') }}:
                         </h3>
                         <p class="text-gray-700 dark:text-gray-300">{{ ucfirst($serviceRequest->status) }}</p>
                     </div>
 
                     <div class="flex justify-center mt-6 space-x-4">
                         <a href="{{ route('client.requests.edit', $serviceRequest) }}" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-                            {{ __('Edit Request') }}
+                            {{ __('Edytuj zgłoszenie') }}
                         </a>
                         <form method="POST" action="{{ route('client.requests.destroy', $serviceRequest) }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105" onclick="return confirm('Confirm delete?')">
-                                {{ __('Delete Request') }}
+                                {{ __('Usuń zgłoszenie') }}
                             </button>
                         </form>
                     </div>

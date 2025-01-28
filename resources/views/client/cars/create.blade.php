@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Add Car') }}
+            {{ __('Dodaj samochód') }}
         </h2>
     </x-slot>
 
@@ -13,7 +13,7 @@
                         @csrf
 
                         <div class="mb-6">
-                            <x-input-label for="make" :value="__('Make')"/>
+                            <x-input-label for="make" :value="__('Marka')"/>
                             <x-text-input id="make" class="block mt-1 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm" type="text" name="make" :value="old('make')" required autofocus autocomplete="make"/>
                             <x-input-error :messages="$errors->get('make')" class="mt-2"/>
                         </div>
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="mb-6">
-                            <x-input-label for="year" :value="__('Year')"/>
+                            <x-input-label for="year" :value="__('Rok')"/>
                             <select id="year" name="year" class="block mt-1 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm" required>
                                 @for ($i = date('Y'); $i >= 1886; $i--)
                                     <option value="{{ $i }}">{{ $i }}</option>
@@ -35,15 +35,15 @@
                         </div>
 
                         <div class="mb-6">
-                            <x-input-label for="last_service_date" :value="__('Last Service Date (optional)')"/>
+                            <x-input-label for="last_service_date" :value="__('Data ostatniej usługi (opcjonalnie)')"/>
                             <div class="flex items-center space-x-4">
                                 <select id="last_service_date" name="last_service_date" class="block mt-1 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm">
-                                    <option value="">{{ __('Select Year') }}</option>
+                                    <option value="">{{ __('Wybierz rok') }}</option>
                                 </select>
                                 <div class="ml-4 flex items-center">
                                     <input class="form-check-input" type="checkbox" id="no_service_checkbox">
                                     <label class="form-check-label text-gray-700 dark:text-gray-300" for="no_service_checkbox">
-                                        {{ __('No Service History') }}
+                                        {{ __('Brak historii serwisowej') }}
                                     </label>
                                 </div>
                             </div>
@@ -51,45 +51,45 @@
                         </div>
 
                         <div class="mb-6">
-                            <x-input-label for="license_plate" :value="__('License Plate')"/>
+                            <x-input-label for="license_plate" :value="__('Tablica rejestracyjna')"/>
                             <x-text-input id="license_plate" class="block mt-1 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm" type="text" name="license_plate" :value="old('license_plate')" required autocomplete="license_plate"/>
                             <x-input-error :messages="$errors->get('license_plate')" class="mt-2"/>
                         </div>
 
                         <div class="mb-6">
-                            <x-input-label for="engine_type" :value="__('Engine Type')"/>
+                            <x-input-label for="engine_type" :value="__('Typ silnika')"/>
                             <select id="engine_type" name="engine_type" class="block mt-1 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm" required>
                                 <option value="diesel">{{ __('Diesel') }}</option>
-                                <option value="petrol">{{ __('Petrol') }}</option>
-                                <option value="gas">{{ __('Gas') }}</option>
-                                <option value="hybrid">{{ __('Hybrid') }}</option>
-                                <option value="electric">{{ __('Electric') }}</option>
+                                <option value="petrol">{{ __('Benzyna') }}</option>
+                                <option value="gas">{{ __('Gaz') }}</option>
+                                <option value="hybrid">{{ __('Hybrydowy') }}</option>
+                                <option value="electric">{{ __('Elektryczny') }}</option>
                             </select>
                             <x-input-error :messages="$errors->get('engine_type')" class="mt-2"/>
                         </div>
 
                         <div class="mb-6">
-                            <x-input-label for="transmission" :value="__('Transmission')"/>
+                            <x-input-label for="transmission" :value="__('Przenoszenie')"/>
                             <select id="transmission" name="transmission" class="block mt-1 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm" required>
                                 <option value="manual">{{ __('Manual') }}</option>
-                                <option value="automated">{{ __('Automated') }}</option>
-                                <option value="automatic">{{ __('Automatic') }}</option>
+                                <option value="automated">{{ __('Zautomatyzowane') }}</option>
+                                <option value="automatic">{{ __('Automatyczny') }}</option>
                             </select>
                             <x-input-error :messages="$errors->get('transmission')" class="mt-2"/>
                         </div>
 
                         <div class="mb-6">
-                            <x-input-label for="mileage" :value="__('Mileage')"/>
+                            <x-input-label for="mileage" :value="__('Przebieg')"/>
                             <x-text-input id="mileage" class="block mt-1 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm" type="number" name="mileage" :value="old('mileage')" required/>
                             <x-input-error :messages="$errors->get('mileage')" class="mt-2"/>
                         </div>
 
                         <div class="mb-6">
-                            <x-input-label for="image" :value="__('Upload Image')"/>
+                            <x-input-label for="image" :value="__('Prześlij obraz')"/>
                             <div class="mt-2">
                                 <label for="image" class="block w-full p-4 border-2 border-dashed border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-center cursor-pointer hover:border-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <span class="text-sm text-gray-600 dark:text-gray-300">
-                                        {{ __('Click to upload a file') }}
+                                        {{ __('Kliknij, aby przesłać plik') }}
                                     </span>
                                 </label>
                                 <input id="image" name="image" type="file" class="hidden" onchange="showSuccessIndicator()"/>
@@ -111,7 +111,7 @@
 
                         <div class="flex justify-center mt-6">
                             <x-primary-button class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-                                {{ __('Add Car') }}
+                                {{ __('Dodaj samochód') }}
                             </x-primary-button>
                         </div>
                     </form>

@@ -38,10 +38,10 @@
             <div class="grid grid-cols-1 gap-4">
                 @isset($services)
                     @if($services->isEmpty())
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">{{ __('You have not added any service yet.') }}</p>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">{{ __('Nie dodałeś jeszcze żadnej usługi.') }}</p>
                         <a href="{{ route('service.create') }}"
                            class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-600 transition">
-                            {{ __('Add a service') }}
+                            {{ __('Dodaj warsztat') }}
                         </a>
                     @else
                         <ul class="list-disc pl-5">

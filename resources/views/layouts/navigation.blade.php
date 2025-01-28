@@ -13,22 +13,22 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Główna strona') }}
                     </x-nav-link>
                     <x-nav-link :href="route('chats')" :active="request()->routeIs('chats')">
-                        {{ __('Chats') }}
+                        {{ __('Czaty') }}
                     </x-nav-link>
                     @if(Auth::check() && Auth::user()->hasRole('repair'))
                         <x-nav-link :href="route('cars')" :active="request()->routeIs('cars')">
-                            {{ __('Cars') }}
+                            {{ __('Moje samochody') }}
                         </x-nav-link>
                         <x-nav-link :href="route('client.requests')" :active="request()->routeIs('client.requests')">
-                            {{ __('Requests') }}
+                            {{ __('Moje zgłoszenia') }}
                         </x-nav-link>
                     @endif
                     @if(Auth::check() && Auth::user()->hasRole('service'))
                         <x-nav-link :href="route('service.requests')" :active="request()->routeIs('service.requests')">
-                            {{ __('Requests') }}
+                            {{ __('Zgłoszenia') }}
                         </x-nav-link>
                         <x-nav-link :href="route('service.index')" :active="request()->routeIs('service.index')">
                             {{ __('Warsztaty') }}
@@ -135,10 +135,11 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('service.offers.history')" :active="request()->routeIs('service.offers.history')">
-                    {{ __('Historia') }}
-                </x-responsive-nav-link>
+                @if(Auth::check() && Auth::user()->hasRole('service'))
+                    <x-responsive-nav-link :href="route('service.offers.history')" :active="request()->routeIs('service.offers.history')">
+                        {{ __('Historia') }}
+                    </x-responsive-nav-link>
+                @endif
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

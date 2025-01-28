@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Your Cars') }}
+            {{ __('Twoje samochody') }}
         </h2>
     </x-slot>
     <div class="py-12 ">
@@ -40,10 +40,10 @@
                 <div class="max-w-full ">
                     @isset($cars)
                         @if ($cars->isEmpty())
-                            <p class="text-gray-600 dark:text-gray-400 mb-4">{{ __('You have not added any cars yet.') }}</p>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">{{ __('Nie dodałeś jeszcze żadnego samochodu.') }}</p>
                             <a href="{{ route('cars.create') }}"
                                class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-600 transition">
-                                {{ __('Add a Car') }}
+                                {{ __('Dodaj samochód') }}
                             </a>
                         @else
                             <ul class="space-y-6">
@@ -56,7 +56,7 @@
                             <div class="mt-6">
                                 <a href="{{ route('cars.create') }}"
                                    class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-600 transition">
-                                    {{ __('Add Another Car') }}
+                                    {{ __('Dodaj kolejny samochód') }}
                                 </a>
                             </div>
                         @endif

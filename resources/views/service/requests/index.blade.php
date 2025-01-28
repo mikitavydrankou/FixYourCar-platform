@@ -61,13 +61,13 @@
                     <form action="{{route('service.offers.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-4">
-                            <label for="selected_service_request_display" class="block text-gray-700 dark:text-gray-300">Selected Request</label>
-                            <input type="text" id="selected_service_request_display" class="mt-2 p-2 w-full border rounded-lg" value="Select a request" disabled required>
+                            <label for="selected_service_request_display" class="block text-gray-700 dark:text-gray-300">Wybrane zgłoszenie</label>
+                            <input type="text" id="selected_service_request_display" class="mt-2 p-2 w-full border rounded-lg" value="Wybierz zgłoszenie" disabled required>
                             <input type="hidden" id="selected_service_request_id" name="service_request_id" value="" required>
                         </div>
 
                         <div class="mb-4">
-                            <label for="service_id" class="block text-gray-700 dark:text-gray-300">Select Workshop</label>
+                            <label for="service_id" class="block text-gray-700 dark:text-gray-300">Wybierz warsztat</label>
                             <select id="service_id" name="service_id" class="mt-2 p-2 w-full border rounded-lg" required>
                                 @foreach($services as $service)
                                     <option value="{{ $service->id }}">{{ $service->name }}</option>
@@ -76,12 +76,12 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="description" class="block text-gray-700 dark:text-gray-300">Notification</label>
+                            <label for="description" class="block text-gray-700 dark:text-gray-300">Powiadomienie</label>
                             <textarea id="description" name="description" class="mt-2 p-2 w-full border rounded-lg" rows="4" required></textarea>
                         </div>
 
                         <div class="mb-4">
-                            <label for="price" class="block text-gray-700 dark:text-gray-300">Price</label>
+                            <label for="price" class="block text-gray-700 dark:text-gray-300">Cena</label>
                             <input id="price" type="number" name="price" class="mt-2 p-2 w-full border rounded-lg" required>
                         </div>
 
@@ -91,7 +91,7 @@
                             <input id="time" type="time" name="time" class="mt-2 p-2 w-full border rounded-lg" required>
                         </div>
 
-                        <button type="submit" class="w-full py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition">Send Offer</button>
+                        <button type="submit" class="w-full py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition">Wyślij ofertę</button>
                     </form>
                 </div>
 

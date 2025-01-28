@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Your Service Requests') }}
+            {{ __('Twoje zgłoszenia') }}
         </h2>
     </x-slot>
 
@@ -39,10 +39,12 @@
                 <div class="max-w-full">
                     @isset($serviceRequests)
                         @if ($serviceRequests->isEmpty())
-                            <p class="text-gray-600 dark:text-gray-400 mb-4">{{ __('You have not added any service requests yet.') }}</p>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">{{ __('
+Nie dodałeś jeszcze żadnych zleceń serwisowych.') }}</p>
                             <a href="{{ route('client.requests.create') }}"
                                class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-600 transition">
-                                {{ __('Add a Service Request') }}
+                                {{ __('
+Dodaj zgłoszenie serwisowe') }}
                             </a>
                         @else
                             <ul class="space-y-6">
@@ -55,7 +57,7 @@
                             <div class="mt-6">
                                 <a href="{{ route('client.requests.create') }}"
                                    class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-600 transition">
-                                    {{ __('Add Another Service Request') }}
+                                    {{ __('Dodaj kolejne zgłoszenie serwisowe') }}
                                 </a>
                             </div>
                         @endif
