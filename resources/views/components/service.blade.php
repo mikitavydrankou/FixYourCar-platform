@@ -21,7 +21,7 @@
                     W toku
                 </a>
 
-                <a href="#" class="bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white py-2 px-6 sm:py-3 sm:px-8 rounded-full transition duration-300 text-sm sm:text-base font-medium shadow-lg">Zarządzaj</a>
+                <a href="{{route('service.show', ['service' => $service])}}" class="bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white py-2 px-6 sm:py-3 sm:px-8 rounded-full transition duration-300 text-sm sm:text-base font-medium shadow-lg">Zarządzaj</a>
                 <a href="{{route('service.offers.history')}}" class="bg-gradient-to-r from-gray-500 to-gray-700 hover:from-gray-600 hover:to-gray-800 text-white py-2 px-6 sm:py-3 sm:px-8 rounded-full transition duration-300 text-sm sm:text-base font-medium shadow-lg">Historia</a>
             </div>
         </div>
