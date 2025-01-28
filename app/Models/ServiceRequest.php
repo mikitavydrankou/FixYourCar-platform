@@ -17,6 +17,7 @@ class ServiceRequest extends Model
         'car_id',
         'problem_description',
         'urgency',
+        'status',
         'location',
         'attachments',
     ];
