@@ -25,6 +25,17 @@ class ServiceRequestController extends Controller
         return view('client.requests.index', compact('serviceRequests'));
     }
 
+    public function service_index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+    {
+        $service_requests = ServiceRequest::all();
+
+        $services = auth()->user()->services;
+        return view('service.requests.index', compact(
+            'service_requests',
+            'services'
+        ));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -62,7 +73,6 @@ class ServiceRequestController extends Controller
                 'car_id' => $request->car_id,
                 'problem_description' => $request->problem_description,
                 'urgency' => $request->urgency,
-                'status' => 'waiting',
                 'location' => $request->location,
                 'attachments' => json_encode($attachments),
             ]);

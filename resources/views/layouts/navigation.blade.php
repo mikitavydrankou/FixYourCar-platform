@@ -26,7 +26,14 @@
                             {{ __('Requests') }}
                         </x-nav-link>
                     @endif
-
+                    @if(Auth::check() && Auth::user()->hasRole('service'))
+                        <x-nav-link :href="route('service.requests')" :active="request()->routeIs('service.requests')">
+                            {{ __('Requests') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('service.index')" :active="request()->routeIs('service.index')">
+                            {{ __('Warsztaty') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -49,6 +56,14 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
+                        @if(Auth::check() && Auth::user()->hasRole('service'))
+                        <x-dropdown-link :href="route('service.index')">
+                            {{ __('Warsztat') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('service.offers.history')" :active="request()->routeIs('service.offers.history')">
+                            {{ __('Historia') }}
+                        </x-dropdown-link>
+                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -93,8 +108,16 @@
                 <x-responsive-nav-link :href="route('client.requests')" :active="request()->routeIs('client.requests')">
                     {{ __('Requests') }}
                 </x-responsive-nav-link>
-            @endif
 
+            @endif
+            @if(Auth::check() && Auth::user()->hasRole('service'))
+                <x-responsive-nav-link :href="route('service.requests')" :active="request()->routeIs('service.requests')">
+                    {{ __('Requests') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('service.index')">
+                    {{ __('Warsztat') }}
+                </x-responsive-nav-link>
+            @endif
 
 
 
@@ -113,6 +136,9 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
+                <x-responsive-nav-link :href="route('service.offers.history')" :active="request()->routeIs('service.offers.history')">
+                    {{ __('Historia') }}
+                </x-responsive-nav-link>
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceOfferController;
+
 use App\Http\Controllers\ServiceRequestController;
 use Illuminate\Support\Facades\Route;
 use Namu\WireChat\Livewire\Chat\Index;
@@ -41,14 +44,25 @@ Route::resource('cars', CarController::class)
         'index' => 'cars',
     ]);
 
+//КЛИЕНТ заявки
+Route::get('client/requests', [ServiceRequestController::class, 'client_index'])->middleware('role:3')->name('client.requests');
+Route::get('client/requests/create', [ServiceRequestController::class, 'create'])->middleware('role:3')->name('client.requests.create');
+Route::post('client/requests/store', [ServiceRequestController::class, 'store'])->middleware('role:3')->name('client.requests.store');
+Route::delete('client/requests/delete/{serviceRequest}', [ServiceRequestController::class, 'destroy'])->middleware('role:3')->name('client.requests.destroy');
+Route::get('client/requests/show/{serviceRequest}', [ServiceRequestController::class, 'show'])->middleware('role:3')->name('client.requests.show');
+Route::get('client/requests/edit/{serviceRequest}', [ServiceRequestController::class, 'edit'])->middleware('role:3')->name('client.requests.edit');
+Route::patch('client/requests/update/{serviceRequest}', [ServiceRequestController::class, 'update'])->middleware('role:3')->name('client.requests.update');
 
-Route::get('client/requests', [ServiceRequestController::class, 'client_index'])->name('client.requests');
-Route::get('client/requests/create', [ServiceRequestController::class, 'create'])->name('client.requests.create');
-Route::post('client/requests/store', [ServiceRequestController::class, 'store'])->name('client.requests.store');
-Route::delete('client/requests/delete/{serviceRequest}', [ServiceRequestController::class, 'destroy'])->name('client.requests.destroy');
-Route::get('client/requests/show/{serviceRequest}', [ServiceRequestController::class, 'show'])->name('client.requests.show');
-Route::get('client/requests/edit/{serviceRequest}', [ServiceRequestController::class, 'edit'])->name('client.requests.edit');
-Route::patch('client/requests/update/{serviceRequest}', [ServiceRequestController::class, 'update'])->name('client.requests.update');
+//СЕРВИС заявки
+Route::get('service/requests', [ServiceRequestController::class, 'service_index'])->middleware('role:2')->name('service.requests');
+
+Route::resource('service', ServiceController::class)
+    ->middleware('role:2');
+
+Route::post('service/offers/store', [ServiceOfferController::class, 'store'])->name('service.offers.store');
+Route::get('service/offers/history', [ServiceOfferController::class, 'history'])->name('service.offers.history');
+Route::get('/service/{service}/index', [ServiceOfferController::class, 'service_index'])
+    ->name('service.offers.index');
 
 require __DIR__.'/auth.php';
 

@@ -37,9 +37,6 @@ class CarController extends Controller
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $imagePath = $this->handleImageUpload($request);
-
-
-
         if (!is_numeric($request->mileage)) {
             return redirect()->back()->withErrors(['mileage' => 'Mileage must be a number']);
         }

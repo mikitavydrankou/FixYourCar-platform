@@ -69,4 +69,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(ServiceRequest::class);
     }
+
+    public function services(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Service::class);
+    }
+
+    public function sentOffers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Service::class);
+    }
 }
