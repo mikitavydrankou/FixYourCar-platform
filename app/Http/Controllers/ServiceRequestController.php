@@ -73,6 +73,7 @@ class ServiceRequestController extends Controller
                 'car_id' => $request->car_id,
                 'problem_description' => $request->problem_description,
                 'urgency' => $request->urgency,
+                'status' => 'waiting',
                 'location' => $request->location,
                 'attachments' => json_encode($attachments),
             ]);

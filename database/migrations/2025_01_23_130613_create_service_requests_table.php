@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('car_id');
             $table->text('problem_description');
             $table->string('urgency');
+            $table->string('status');
             $table->string('location');
             $table->json('attachments');
             $table->timestamps();
