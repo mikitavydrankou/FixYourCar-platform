@@ -65,10 +65,7 @@
         <div class="p-4">
             <div class="mb-4">
                 <h5 class="text-lg font-semibold text-gray-800 dark:text-gray-100">{{ $car->make }} - {{ $car->model }}</h5>
-                <div class="flex items-center text-sm mb-2">
-                    <span class="w-3 h-3 rounded-full {{ $currentStatus['class'] }} mr-2" style="width: 12px; height: 12px;"></span>
-                    <span class="text-gray-600 dark:text-gray-200">{{ $currentStatus['text'] }}</span>
-                </div>
+
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
                     Rok: {{ $car->year ?? 'Brak' }}
                 </p>
