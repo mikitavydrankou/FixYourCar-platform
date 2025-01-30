@@ -29,7 +29,7 @@
         @endphp
         @if(count($attachments) > 0)
             @if(count($attachments) > 1)
-                <div id="carouselExampleCaptions{{ $serviceRequest->id }}" class="relative w-full" data-carousel="slide">
+                <div id="carouselExampleCaptions{{ $serviceRequest->id }}" class="relative w-full z-10" data-carousel="slide">
                     <div class="relative h-56 md:h-96 overflow-hidden rounded-lg">
                         @foreach($attachments as $index => $image)
                             <div class="hidden duration-700" data-carousel-item>
@@ -78,7 +78,7 @@
 </div>
 
 <!-- Модальное окно -->
-<div id="customModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+<div id="customModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
     <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg w-full">
         <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Informacja o zgłoszeniu</h2>
         <h6 class="text-sm text-gray-600 dark:text-gray-400 mt-2">User: "{{ $serviceRequest->user->name }}" </h6>

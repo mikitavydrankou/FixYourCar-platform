@@ -90,6 +90,9 @@ class ServiceOfferController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'service_request_id' => 'required|exists:service_requests,id',
+        ]);
 
         ServiceOffer::create([
             'service_request_id' => $request->service_request_id,
