@@ -1,18 +1,18 @@
-Quick Start
+**Quick Start**
 
-**Clone or download this repo and place it into your server.
-composer install**
+1. Clone or download this repo and place it into your server.
+composer install
 
-**cp .env.example .env**
+2. cp .env.example .env
 
-**Create database and modify .env with your DB name and Pusher credentials.**
+3. Create database and modify .env with your DB name and Pusher credentials.
 
-**php artisan migrate --seed**
+4. php artisan migrate --seed
 
-**php artisan key:generate**
+5. php artisan key:generate
 
-**npm install && npm run dev**
+6. npm install && npm run dev
 
-**php artisan serve**
+7. php artisan serve
 
 Good luck!
