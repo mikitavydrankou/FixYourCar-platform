@@ -19,7 +19,7 @@ class ReviewController extends Controller
 
         // Проверяем, что мы нашли нужный оффер
         if (!$serviceOffer) {
-            return redirect()->route('client.requests')->with('error', 'Не удалось найти завершенный сервис-оффер для этого запроса.');
+            return redirect()->route('client.requests')->with('error', 'Nie można znaleźć kompletnej oferty usług dla tego żądania.');
         }
 
         $serviceRequest = $serviceOffer->serviceRequest; // Получаем связанный с этим оффером запрос
@@ -41,7 +41,7 @@ class ReviewController extends Controller
             $serviceRequest->save();
         }
 
-        return redirect()->route('client.requests')->with('status', 'Отзыв успешно добавлен!');
+        return redirect()->route('client.requests')->with('status', 'Recenzja dodana pomyślnie!');
     }
 
 

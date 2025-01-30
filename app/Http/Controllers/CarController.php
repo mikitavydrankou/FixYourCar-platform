@@ -38,7 +38,7 @@ class CarController extends Controller
     {
         $imagePath = $this->handleImageUpload($request);
         if (!is_numeric($request->mileage)) {
-            return redirect()->back()->withErrors(['mileage' => 'Mileage must be a number']);
+            return redirect()->back()->withErrors(['mileage' => 'Przebieg to cyfra']);
         }
 
         Car::create([
@@ -54,7 +54,7 @@ class CarController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('cars')->with('status', 'Maszyna została добавлена успешно');
+        return redirect()->route('cars')->with('status', 'Samochód został pomyślnie dodany');
     }
 
     /**
