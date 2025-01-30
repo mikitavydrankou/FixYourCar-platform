@@ -10,6 +10,10 @@ class ServiceOffer extends Model
 {
     use HasFactory;
 
+    /**
+     * @var mixed|string
+     */
+
     protected $table = 'service_offers';
 
     protected $fillable = [
@@ -18,7 +22,8 @@ class ServiceOffer extends Model
         'price',
         'description',
         'date',
-        'time'
+        'time',
+        'status'
     ];
 
 

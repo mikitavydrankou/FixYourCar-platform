@@ -10,14 +10,15 @@
 
         <div class="flex items-center gap-2 truncate ">
             <h2 class=" text-2xl font-bold dark:text-white">Chats 
-            </h2> 
+            </h2>
         </div>
 
 
         <div class="flex gap-x-3 items-center  ">
 
-            @if (WireChat::showNewChatModalButton() == true)
-               
+            @if (WireChat::showNewChatModalButton() == true
+                && !Auth::user()->hasRole("repair"))
+
             <button wire:click="$dispatch('openChatDialog', {component: 'new-chat'})" id="open-new-chat-modal-button" class=" flex items-center focus:outline-none">
                 <svg class="w-8 h-8 -mb-1 text-gray-500 hover:text-gray-900 dark:hover:text-gray-200 dark:text-gray-300"
                     xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -60,7 +61,7 @@
     </section>
 
     {{-- Search input --}}
-    @if (config('wirechat.allow_chats_search', false) == true)
+    @if (config('wirechat.allow_chats_search', false) == true && !Auth::user()->hasRole("repair"))
         <section>
 
             <div class="px-2 rounded-lg dark:bg-gray-800 bg-gray-100  grid grid-cols-12 items-center">
@@ -76,7 +77,7 @@
                 <input id="chats-search-field" name="chats_search" maxlength="100" type="search" wire:model.live.debounce='search'
                     placeholder="Search" autocomplete="off"
                     class=" col-span-11 border-0  bg-inherit dark:text-white outline-none w-full focus:outline-none  focus:ring-0 hover:ring-0">
-          
+
                 </div>
 
         </section>

@@ -21,7 +21,7 @@ class Car extends Model
         'mileage',
         'last_service_date',
         'image',
-        'status'
+
     ];
 
     protected $attributes = [

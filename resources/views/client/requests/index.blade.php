@@ -49,9 +49,11 @@ Dodaj zgłoszenie serwisowe') }}
                         @else
                             <ul class="space-y-6">
                                 @foreach ($serviceRequests as $serviceRequest)
-                                    <li>
-                                        <x-client_request :serviceRequest="$serviceRequest"/>
-                                    </li>
+                                    @if($serviceRequest->status != 'completed')
+                                        <li>
+                                            <x-client_request :serviceRequest="$serviceRequest"/>
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                             <div class="mt-6">

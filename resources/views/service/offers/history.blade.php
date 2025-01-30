@@ -59,10 +59,20 @@
                                             </h4>
                                             <p class="text-gray-700 dark:text-gray-300">{{ __('Opis: ') }} {{ $offer->description }}</p>
                                             <p class="text-gray-700 dark:text-gray-300">{{ __('Cena: ') }} ${{ number_format($offer->price, 2) }}</p>
-                                            <p class="text-gray-700 dark:text-gray-300">{{ __('Status: ') }}
+                                            <p class="text-gray-700 dark:text-gray-300">{{ __('Status oferty: ') }}
                                                 <span class="font-semibold
-                                                    {{ $offer->status === 'sent' ? 'text-blue-500' : ($offer->status === 'accepted' ? 'text-green-500' : 'text-red-500') }}">
+                                                    {{ $offer->status === 'sent' ? 'text-blue-500' : ($offer->status === 'accepted' ? 'text-green-500' : 'text-gray-800') }}">
                                                     {{ ucfirst($offer->status) }}
+                                                </span>
+                                            </p>
+                                            <p class="text-gray-700 dark:text-gray-300">{{ __('Status zgłoszenia: ') }}
+                                                <span class="font-semibold">
+                                                    {{ $offer->serviceRequest->status}}
+                                                </span>
+                                            </p>
+                                            <p class="text-gray-700 dark:text-gray-300">{{ __('Status zgłoszenia: ') }}
+                                                <span class="font-semibold">
+                                                    {{ $offer->serviceRequest->problem_description}}
                                                 </span>
                                             </p>
                                             <p class="text-gray-600 dark:text-gray-400 text-sm">

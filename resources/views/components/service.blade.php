@@ -12,7 +12,7 @@
                     <p class="text-gray-600 dark:text-gray-400 text-sm flex items-center">📞 <a class="ml-2 text-blue-600 hover:underline">{{ $service->phone }}</a></p>
                     <p class="text-gray-600 dark:text-gray-400 text-sm flex items-center">✉️ <a class="ml-2 text-blue-600 hover:underline">{{ $service->email }}</a></p>
                     <p class="text-gray-600 dark:text-gray-400 text-sm flex items-center">📝 <span class="ml-2">{{ $service->service_description }}</span></p>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm flex items-center">⭐ <span class="ml-2 font-medium">{{ $service->rating }}</span></p>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm flex items-center">⭐ <span class="ml-2 font-medium">{{ $service->averageRating() }}</span></p>
                 </div>
             </div>
             <div class="flex flex-wrap justify-center gap-4 mt-6">

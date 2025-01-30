@@ -21,19 +21,6 @@ class ServiceRequest extends Model
         'location',
         'attachments',
     ];
-
-    public static function boot(): void
-    {
-        parent::boot();
-
-        static::created(function ($clientRequest) {
-            $car = $clientRequest->car;
-            if ($car) {
-                $car->status = '2';
-                $car->save();
-            }
-        });
-    }
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -44,11 +31,6 @@ class ServiceRequest extends Model
         return $this->belongsTo(Car::class);
     }
 
-    public function serviceRequest(): BelongsTo
-    {
-        return $this->belongsTo(ServiceRequest::class);
-    }
-
     public function serviceOffers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(ServiceOffer::class);
@@ -56,6 +38,6 @@ class ServiceRequest extends Model
 
     public function selectedServiceOffer(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(ServiceOffer::class)->where('status', 'accepted');
+        return $this->hasOne(ServiceOffer::class);
     }
 }

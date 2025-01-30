@@ -54,32 +54,37 @@
      </button>
      @endif
     {{-- <h5 class="text font-semibold text-gray-800 dark:text-gray-100">Recent Chats</h5> --}}
-        <section class="my-4">
-            @if ($users)
-
-                <ul class="overflow-auto flex flex-col">
-
-                    @foreach ($users as $key => $user)
-                        <li wire:key="user-{{ $key }}"
-                            wire:click="createConversation('{{ $user->id }}',{{ json_encode(get_class($user)) }})"
-                            class="flex cursor-pointer group gap-2 items-center p-2">
-
-                            <x-wirechat::avatar src="{{ $user->cover_url }}" class="w-10 h-10" />
-
-                            <p class="group-hover:underline transition-all">
-                                {{ $user->display_name }}</p>
-
-                        </li>
-                    @endforeach
 
 
-                </ul>
-            {{-- @else
-                No accounts found --}}
+            <section class="my-4">
+                @if ($users)
 
-            @endif
+                    <ul class="overflow-auto flex flex-col">
 
-        </section>
+                        @foreach ($users as $key => $user)
+                            <li wire:key="user-{{ $key }}"
+                                wire:click="createConversation('{{ $user->id }}',{{ json_encode(get_class($user)) }})"
+                                class="flex cursor-pointer group gap-2 items-center p-2">
+
+                                <x-wirechat::avatar src="{{ $user->cover_url }}" class="w-10 h-10" />
+
+                                <p class="group-hover:underline transition-all">
+                                    {{ $user->display_name }}</p>
+
+                            </li>
+                        @endforeach
+
+
+                    </ul>
+                    {{-- @else
+                        No accounts found --}}
+
+                @endif
+
+            </section>
+
+
+
     </div>
 </div>
 </div>

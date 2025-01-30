@@ -28,7 +28,41 @@ class ServiceOfferController extends Controller
         return view('service.offers.history', compact('offers'));
     }
 
-    public function client_index(ServiceRequest $service_request)
+    public function acceptOffer(Request $request, ServiceOffer $offer)
+    {
+        // Обновляем статус всех предложений на "rejected"
+        $offer->serviceRequest->serviceOffers()->where('id', '!=', $offer->id)->update(['status' => 'rejected']);
+        $offer->serviceRequest->serviceOffers()->where('id', '=', $offer->id)->update(['status' => 'accepted']);
+
+        // Обновляем статус принятого предложения на "accepted"
+        $offer->update(['status' => 'accepted']);
+
+        // Обновляем статус заявки на "pending"
+        $offer->serviceRequest->update(['status' => 'pending']);
+        return redirect()->route('client.requests')->with('status', 'Oferta została zaakceptowana, a pozostałe odrzucone.');
+    }
+
+    public function updateStatus(ServiceOffer $offer)
+    {
+        $offer->status = 'completed';
+        $offer->save();
+
+        $offer->serviceRequest->status = 'review';
+        $offer->serviceRequest->save();
+
+        return redirect()->route('client.requests')->with('status', 'Status zmieniony!');
+    }
+
+
+    public function client_index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+    {
+        $user = Auth::user();
+        $service_requests = $user->serviceRequests()->with('serviceOffers')->get();
+        $offers = $service_requests->flatMap->serviceOffers;
+        return view('client.offers.index', compact('offers'));
+    }
+
+    public function client_offer(ServiceRequest $service_request)
     {
         $offers = $service_request->serviceOffers;
         return view('client.offers.index', compact('offers'));
@@ -36,7 +70,10 @@ class ServiceOfferController extends Controller
 
     public function service_index(Service $service)
     {
-        $activeOffers = $service->serviceOffers()->where('status', 'active')->get();
+        $activeOffers = $service->serviceOffers()
+            ->where('status', 'accepted')
+            ->with('serviceRequest') // Предварительная загрузка
+            ->get();
         return view('service.offers.index', compact('service', 'activeOffers'));
     }
 

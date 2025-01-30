@@ -92,7 +92,8 @@ class ServiceRequestController extends Controller
      */
     public function show(ServiceRequest $serviceRequest)
     {
-        return view('client.requests.show', compact('serviceRequest',));
+        $acceptedOffer = $serviceRequest->selectedServiceOffer;
+        return view('client.requests.show', compact('serviceRequest', 'acceptedOffer'));
 
     }
 

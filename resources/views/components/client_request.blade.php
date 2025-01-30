@@ -68,13 +68,30 @@
         @endif
 
         <h5 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mt-4">{{ $serviceRequest->car->make }} - {{ $serviceRequest->location }}</h5>
+        <h5 class="text-sm text-gray-600 dark:text-gray-400 mt-2">Status: {{ $serviceRequest->status }}</h5>
 
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Złożono: {{ \Carbon\Carbon::parse($serviceRequest->created_at)->format('Y-m-d H:i:s') }}</p>
 
         <div class="mt-4 grid gap-2">
-            <a href="{{ route('client.requests.show', $serviceRequest) }}" class="w-full text-center text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-md">
-                Zobacz
-            </a>
+
+
+            @if($serviceRequest->status === 'pending')
+                <a href="{{ route('client.requests.show', $serviceRequest) }}" class="w-full text-center text-white bg-green-500 hover:bg-green-600 py-2 px-4 rounded-md">
+                    Zobacz szczegóły
+                </a>
+            @elseif($serviceRequest->status === 'review')
+                <a href="{{ route('client.requests.show', $serviceRequest) }}" class="w-full text-center text-white bg-green-500 hover:bg-green-600 py-2 px-4 rounded-md">
+                    Ustaw opinie
+                </a>
+            @elseif($serviceRequest->status === 'waiting')
+                <a href="{{ route('client.requests.show', $serviceRequest) }}" class="w-full text-center text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-md">
+                    Zobacz
+                </a>
+                <a href="{{ route('client.offer', $serviceRequest) }}" class="w-full text-center text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-md">
+                    Oferty
+                </a>
+            @endif
+
             <form method="POST" action="{{ route('client.requests.destroy', $serviceRequest) }}" class="w-full">
                 @csrf
                 @method('DELETE')

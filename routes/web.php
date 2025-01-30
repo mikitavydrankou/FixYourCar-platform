@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceOfferController;
 
+use App\Http\Controllers\ServiceOffersController;
 use App\Http\Controllers\ServiceRequestController;
 use Illuminate\Support\Facades\Route;
 use Namu\WireChat\Livewire\Chat\Index;
@@ -63,6 +65,16 @@ Route::post('service/offers/store', [ServiceOfferController::class, 'store'])->n
 Route::get('service/offers/history', [ServiceOfferController::class, 'history'])->name('service.offers.history');
 Route::get('/service/{service}/index', [ServiceOfferController::class, 'service_index'])
     ->name('service.offers.index');
+
+
+//КЛИЕНТ ответы от сервиса  МНОГО
+Route::get('client/offers', [ServiceOfferController::class, 'client_index'])->name('client.offers');
+//КЛИЕНТ ответ от сервиса  ОДИН
+Route::get('client/offer/{service_request}', [ServiceOfferController::class, 'client_offer'])->name('client.offer');
+Route::post('/offers/{offer}/accept', [ServiceOfferController::class, 'acceptOffer'])->name('offers.accept');
+
+Route::patch('/offers/{offer}/update-status', [ServiceOfferController::class, 'updateStatus'])->name('offers.updateStatus');
+Route::post('/service/{service}/review', [ReviewController::class, 'store'])->name('service.review');
 
 require __DIR__.'/auth.php';
 

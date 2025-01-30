@@ -103,9 +103,11 @@
                         @else
                             <ul class="space-y-4">
                                 @foreach($service_requests as $service_request)
-                                    <li>
-                                        <x-service_request :service_request="$service_request"/>
-                                    </li>
+                                    @if($service_request->status == 'waiting')
+                                        <li>
+                                            <x-service_request :service_request="$service_request"/>
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                         @endif
