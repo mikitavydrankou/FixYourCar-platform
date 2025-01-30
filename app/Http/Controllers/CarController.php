@@ -106,6 +106,10 @@ class CarController extends Controller
 //        if ($car->serviceRequests()->exists()) {
 //            return redirect()->route('cars')->withErrors(['error' => 'Nie możesz usunąć samochodu, jeśli istnieją zgłoszenia ']);
 //        }
+
+        if ($car->serviceRequests()->exists()) {
+            return redirect()->route('cars')->withErrors(['error' => 'Nie możesz usunąć samochodu, jeśli istnieją zgłoszenia ']);
+        }
         $car->delete();
         return redirect()->route('cars')->with('status', 'Samochód został usunięty!');
     }

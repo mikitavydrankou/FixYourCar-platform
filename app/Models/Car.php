@@ -32,4 +32,9 @@ class Car extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function serviceRequests(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(ServiceRequest::class, 'car_id');
+    }
 }
