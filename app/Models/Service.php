@@ -40,5 +40,4 @@ class Service extends Model
     {
         return $this->reviews()->avg('rating');
     }
-
 }

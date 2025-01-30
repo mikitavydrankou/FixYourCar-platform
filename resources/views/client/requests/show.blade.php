@@ -73,6 +73,7 @@
                                 <form action="{{ route('service.review', $serviceRequest->selectedServiceOffer->service) }}" method="POST">
                                     @csrf
                                     <div class="mt-2">
+                                        <input type="hidden" name="service_request_id" value="{{ $serviceRequest->id }}">
                                         <label for="rating" class="text-sm text-gray-700 dark:text-gray-300">Оценка (1-5):</label>
                                         <select name="rating" id="rating" class="w-full p-2 border rounded">
                                             <option value="5">⭐⭐⭐⭐⭐</option>

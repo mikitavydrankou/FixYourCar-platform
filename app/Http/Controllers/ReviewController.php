@@ -10,11 +10,19 @@ class ReviewController extends Controller
 {
     public function store(Request $request, Service $service)
     {
+        // Ищем соответствующий serviceOffer
         $serviceOffer = $service->serviceOffers()
             ->where('status', 'completed')
+            ->where('service_request_id', $request->service_request_id) // получаем service_request_id из запроса
+            ->where('service_id', $service->id) // фильтруем по текущему сервису
             ->first();
 
-        $serviceRequest = $serviceOffer ? $serviceOffer->serviceRequest : null;
+        // Проверяем, что мы нашли нужный оффер
+        if (!$serviceOffer) {
+            return redirect()->route('client.requests')->with('error', 'Не удалось найти завершенный сервис-оффер для этого запроса.');
+        }
+
+        $serviceRequest = $serviceOffer->serviceRequest; // Получаем связанный с этим оффером запрос
 
         // Создаем отзыв
         Review::create([
@@ -24,15 +32,17 @@ class ReviewController extends Controller
             'service_request_id' => $serviceRequest ? $serviceRequest->id : null,
         ]);
 
-
+        // Обновляем рейтинг сервиса
         $service->update(['rating' => $service->averageRating()]);
 
-
-
+        // Обновляем статус serviceRequest на 'completed', если это возможно
+        if ($serviceRequest) {
             $serviceRequest->status = 'completed';
             $serviceRequest->save();
+        }
 
-        $serviceRequest->refresh();
         return redirect()->route('client.requests')->with('status', 'Отзыв успешно добавлен!');
     }
+
+
 }
