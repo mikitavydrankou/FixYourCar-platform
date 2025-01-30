@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('service_id');
-            $table->integer('rating')->default(0);
+            $table->unsignedBigInteger('service_request_id');
+            $table->float('rating')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->foreign('service_request_id')->references('id')->on('service_requests')->onDelete('cascade');
         });
     }
 
