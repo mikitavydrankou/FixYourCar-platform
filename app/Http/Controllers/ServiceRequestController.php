@@ -51,41 +51,20 @@ class ServiceRequestController extends Controller
      */
     public function store(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
     {
-        if ($request->hasFile('attachments')) {
+        $attachments = $this->handleImagesUpload($request);
 
-            $request->validate([
-                'attachments.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
+        ServiceRequest::create([
+            'user_id' => auth()->id(),
+            'car_id' => $request->car_id,
+            'problem_description' => $request->problem_description,
+            'urgency' => $request->urgency,
+            'status' => 'waiting',
+            'location' => $request->location,
+            'attachments' => json_encode($attachments),
+        ]);
 
-            $attachments = [];
-
-            $manager = new ImageManager(new Driver());
-
-            foreach ($request->file('attachments') as $file) {
-                $image = $manager->read($file);
-                $imageName = time() . '_' . $file->getClientOriginalName();
-                $image->orient()->toJpeg()->save(public_path('attachments/' . $imageName));
-                $attachments[] = 'attachments/' . $imageName;
-            }
-
-            ServiceRequest::create([
-                'user_id' => auth()->id(),
-                'car_id' => $request->car_id,
-                'problem_description' => $request->problem_description,
-                'urgency' => $request->urgency,
-                'status' => 'waiting',
-                'location' => $request->location,
-                'attachments' => json_encode($attachments),
-            ]);
-
-
-            return redirect()->route('client.requests')->with('status', 'Zgłoszenie zostało dodane pomyślnie');
-        }
-
-        // Если файлов нет, можно вернуть ошибку
-        return redirect()->back()->withErrors(['attachments' => 'Żadne pliki nie zostały przesłane']);
+        return redirect()->route('client.requests')->with('status', 'Zgłoszenie zostało dodane pomyślnie');
     }
-
 
     /**
      * Display the specified resource.
@@ -110,30 +89,12 @@ class ServiceRequestController extends Controller
      */
     public function update(Request $request, ServiceRequest $serviceRequest)
     {
-        if ($request->hasFile('attachments')) {
-
-            $request->validate([
-                'attachments.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-
-            $attachments = [];
-
-            $manager = new ImageManager(new Driver());
-
-            foreach ($request->file('attachments') as $file) {
-                $image = $manager->read($file);
-                $imageName = time() . '_' . $file->getClientOriginalName();
-                $image->orient()->toJpeg()->save(public_path('attachments/' . $imageName));
-                $attachments[] = 'attachments/' . $imageName;
-            }
-        }
-
+        $attachments = $this->handleImagesUpload($request);
 
         $input = $request->only([
             'problem_description',
             'urgency',
             'location',
-
         ]);
 
         $input['attachments'] = $attachments;
@@ -151,4 +112,25 @@ class ServiceRequestController extends Controller
         $serviceRequest->delete();
         return redirect()->route('client.requests')->with('status', 'Zgłoszenie zostało pomyślnie anulowane');
     }
+
+    public function handleImagesUpload(Request $request): array
+    {
+        if ($request->hasFile('attachments')) {
+            $request->validate([
+                'attachments.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+            $attachments = [];
+            $manager = new ImageManager(new Driver());
+            foreach ($request->file('attachments') as $file) {
+                $image = $manager->read($file);
+                $imageName = time() . '_' . $file->getClientOriginalName();
+                $image->orient()->toJpeg()->save(public_path('attachments/' . $imageName));
+                $attachments[] = 'attachments/' . $imageName;
+            }
+        } else {
+            $attachments = ['/default_images/1.jpg', '/default_images/2.jpeg', '/default_images/3.jpeg'];
+        }
+        return $attachments;
+    }
 }
+

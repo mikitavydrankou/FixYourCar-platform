@@ -15,6 +15,12 @@
         <!-- Content Section -->
         <div class="p-4 flex-1 flex flex-col justify-between">
             <div>
+                <h1 class="text-gray-600 dark:text-gray-400 text-sm">
+                    Marka: {{ $car->make ?? 'Brak' }}
+                </h1>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Model: {{ $car->model ?? 'Brak' }}
+                </p>
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
                     Rok: {{ $car->year ?? 'Brak' }}
                 </p>
@@ -22,7 +28,7 @@
                     Van: {{ $car->license_plate ?? 'Brak' }}
                 </p>
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
-                    Przebieg: {{ $car->mileage ?? 'Brak' }}
+                    Przebieg: {{ $car->mileage ?? 'Brak' }} km
                 </p>
             </div>
 

@@ -35,9 +35,7 @@
                             {{ __('Data ostatniego serwisu') }}:
                         </h3>
                         <p class="text-gray-700 dark:text-gray-300">
-                            {{ $car->last_service_date ? __('
-                            Brak historii serwisowej') : __('
-                            Brak historii serwisowej') }}
+                            {{ $car->last_service_date ? $car->last_service_date :__('Brak historii serwisowej')}}
                         </p>
                     </div>
 

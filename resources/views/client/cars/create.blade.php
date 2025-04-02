@@ -41,7 +41,7 @@
                                     <option value="">{{ __('Wybierz rok') }}</option>
                                 </select>
                                 <div class="ml-4 flex items-center">
-                                    <input class="form-check-input" type="checkbox" id="no_service_checkbox">
+                                    <input class="form-check-input" type="checkbox" id="no_service_checkbox" name="no_service">
                                     <label class="form-check-label text-gray-700 dark:text-gray-300" for="no_service_checkbox">
                                         {{ __('Brak historii serwisowej') }}
                                     </label>

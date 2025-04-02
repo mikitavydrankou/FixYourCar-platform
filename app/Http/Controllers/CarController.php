@@ -12,7 +12,6 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class CarController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -41,6 +40,8 @@ class CarController extends Controller
             return redirect()->back()->withErrors(['mileage' => 'Przebieg to cyfra']);
         }
 
+        $lastServiceDate = $request->has('no_service') ? null : $request->last_service_date;
+
         Car::create([
             'user_id' => Auth::id(),
             'make' => $request->make,
@@ -50,7 +51,7 @@ class CarController extends Controller
             'engine_type' => $request->engine_type,
             'transmission' => $request->transmission,
             'mileage' => $request->mileage,
-            'last_service_date' => $request->last_service_date,
+            'last_service_date' => $lastServiceDate,
             'image' => $imagePath,
         ]);
 
@@ -80,6 +81,8 @@ class CarController extends Controller
     {
         $imagePath = $this->handleImageUpload($request);
 
+        $lastServiceDate = $request->has('no_service') ? null : $request->last_service_date;
+
         $input = $request->only([
             'make',
             'model',
@@ -88,7 +91,7 @@ class CarController extends Controller
             'engine_type',
             'transmission',
             'mileage',
-            'last_service_date',
+            'last_service_date' => $lastServiceDate,
         ]);
 
         $input['image'] = $imagePath;
@@ -132,7 +135,7 @@ class CarController extends Controller
             $image->orient()->toJpeg()->save(public_path('images/' . $imageName));
             $imagePath = '/images/' . $imageName;
         } else {
-            $imagePath = '/images/default_car.jpg';
+            $imagePath = '/default_images/default_car.jpeg';
         }
 
         return $imagePath;

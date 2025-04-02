@@ -151,14 +151,6 @@ class Chats extends Component
 
         return in_array($field, $columnCache[$table]);
     }
-    // В класс Chats добавьте:
-
-    protected $listeners = ['startChatWithUser'];
-
-    public function startChatWithUser($userId)
-    {
-        $this->createConversation($userId, 'App\Models\User');
-    }
 
     public function mount()
     {

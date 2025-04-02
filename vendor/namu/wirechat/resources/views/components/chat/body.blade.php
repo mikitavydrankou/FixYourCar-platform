@@ -29,7 +29,7 @@
 
     }
 
-    }"
+    }"  
         x-init="
             requestAnimationFrame(() => {
                 this.height = $el.scrollHeight;
@@ -49,7 +49,7 @@
         requestAnimationFrame(() => {
             updateScrollPosition();
         });"
-
+  
     id="conversation" x-ref="chatbox"
     x-cloak
     {{$attributes->merge(['class'=>'flex flex-col h-full relative gap-2 gap-y-4 p-4 md:p-5 lg:p-8  flex-grow  overscroll-contain overflow-x-hidden w-full my-auto'])}}
@@ -60,7 +60,7 @@
     <div x-cloak wire:loading.delay.class.remove="invisible" wire:target="loadMore" class="invisible transition-all duration-300 ">
         <x-wirechat::loading-spin />
     </div>
-
+ 
     {{-- Define previous message outside the loop --}}
     @php
         $previousMessage = null;
@@ -167,7 +167,7 @@
                                     {{-- reply button --}}
                                     <button wire:click="setReply('{{ $message->id }}')"
                                         class=" invisible  group-hover:visible hover:scale-110 transition-transform">
-
+                                    
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-reply-fill w-4 h-4 dark:text-white"
                                             viewBox="0 0 16 16">
@@ -203,7 +203,7 @@
 
 
                                             {{-- Dont show delete for me if is group --}}
-                                            @if (!$isGroup)
+                                            @if (!$isGroup) 
                                             <button dusk="delete_message_for_me" wire:click="deleteForMe('{{ $message->id }}')"
                                                 wire:confirm="Are you sure?" class="w-full text-start">
                                                 <x-wirechat::dropdown-link>
@@ -219,7 +219,7 @@
                                                 </x-wirechat::dropdown-link>
                                             </button>
 
-
+                                      
                                         </x-slot>
                                     </x-wirechat::dropdown>
 
